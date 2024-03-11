@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{% endblock title %}</title>
+    <style>
+        nav{
+            background-color: rgb(126, 0, 126);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+ 
+        }
+        nav{
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        
+        .nav-items-list{
+            list-style: none;
+            display: flex ;  
+        }
+        .nav-items-list li{
+            margin:0px 10px;
+        }
+        .nav-items-list li a:hover{
+            background-color: white;
+        }
+        .nav-btn:hover{
+            color: black;
+        }
+        .nav-btn{
+            text-decoration: none;
+            color: white;
+            font-size: larger;
+            padding: 5px;
+        }
+        #logo a{
+            color: white;
+            text-decoration: none;
+            font-size: 25px;
+            padding: 5px 10px;
+        }
+
+
+        </style>
+        {% block style %}{% endblock style %}
+</head>
+<body style="margin: 0%;">
+    <nav class="navbar">
+        <span class="" id="logo"><a href="" class="">Python-Django</a></span>
+        <ul class="nav-items-list">
+            {% if user.is_authenticated %}
+            <li class="nav-item-btn">
+                <a href="/logout-user" class="nav-btn">Logout</a>
+            </li> 
+            {% else %}
+            <li class="nav-item-btn">
+                <a href="/login-user" class="nav-btn">Login</a>
+            </li> 
+            <li class="nav-item-btn">
+                <a href="/signup-user" class="nav-btn">Signup</a>
+            </li>
+            {% endif %}
+        </ul>
+    </nav>
+    <!--main -->
+    <div class="">
+        {% block body %}
+        {% endblock body %}
+    </div>
+</body>
+</html>
