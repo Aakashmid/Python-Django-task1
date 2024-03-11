@@ -1,9 +1,69 @@
 {% extends "app/base.html" %}
-
-
+{% block title %}Login{% endblock title %}
 {% block style %}
 <style>
-    .form-body {}
+    .form-body {
+        background-color: rgb(238, 238, 238);
+        padding: 20px;
+        width: 30%;
+        margin:20px auto;
+        border-radius: 4px;
+
+    }
+
+    #login_form {
+        padding: 5px;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .form-item {
+        display: flex;
+        flex-direction: column;
+        padding: 10px 0px;
+    }
+
+    label {
+        font-size: larger;
+    }
+
+    input {
+        font-size: large;
+        padding: 7px;
+        outline: none;
+        border-radius: 5px;
+        border: 1px solid black;
+    }
+    .form-body h3{
+        text-align: center;
+        font-size: larger;
+        font-family: Georgia, 'Times New Roman', Times, serif;
+    }
+    .btn-1{
+        padding: 10px 5px;
+        margin-top: 10px;
+        background-color:rgb(0, 102, 255);
+        border-radius: 10px;
+        color: white;
+        font-size: large;
+        width: 60%;
+        border: 1px ;
+        margin-right: auto;
+        margin-left: auto;
+    }
+
+    @media(max-width:720px) {
+        .form-body{
+            width: 80%;
+        }
+    }
+    
+        @media(min-width:720px)  and (max-width:1024px) {
+        .form-body{
+            width: 60%;
+        }
+    }
 </style>
 
 {% endblock style %}
@@ -12,7 +72,24 @@
 {% block body %}
 <div class="container">
     <div class="form-body">
-
+        <h3 class="" id="Caption">Login Here</h3>
+        <form id="login_form" action="{% url 'app:login' %}" method="post" class="">
+            {% csrf_token %}
+            <div class="form-item">
+                <label for="username">Username</label>
+                <input type="text" id="username" name="username" required>
+            </div>
+            <div class="form-item">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" required>
+                <span class="" style="text-align: center;padding: 5px;">
+                    If not have an account ?
+                    <a href="{% url 'app:Create account' %}" class=""> Sign Up</a>
+                </span>
+            </div> 
+            
+            <button class="btn-1"  type="submit">Login</button>
+        </form>
     </div>
 </div>
 {% endblock body %}

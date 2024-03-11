@@ -1,0 +1,55 @@
+{% extends "app/base.html" %}
+
+{% block title %}Home{% endblock title %}
+{% block style %}
+<style>
+    #home_page_caption{
+        text-align: center;
+        margin-top: 20px;
+    }
+    
+    #Detail_box{
+        width: fit-content;
+        margin: auto;
+        /* display: flex; */
+        /* flex-direction: column; */
+        /* justify-content: center; */
+    }
+    #Detail_box ul{
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+    }
+    #Detail_box ul li{
+        margin-top: 5px;
+        font-size: larger;
+    }
+</style>
+{% endblock style %}
+
+
+
+{% block body %}
+<div class="container">
+    <h2 id="home_page_caption" class="">Dashbord</h2>
+    <div class="" id="Detail_box">
+        <ul class="">
+            <span class="" >
+                <img src="/media/{{User.profileImg}}" alt=".." style="width: 100px; height: 100px; border-radius: 30px;">
+            </span>
+            <li class="">
+                Name -  {{User.first_name}} {{user.last_name}}
+            </li>
+           
+            <li class="">
+                Username -  {{User.username}}
+            </li>
+            <li class="">
+                Email Addres -  {{User.email}}</div>
+            </li>
+        </ul>    
+            
+    </div>
+</div>
+
+{% endblock body %}

@@ -1,4 +1,9 @@
-from django.shortcuts import render
+from django.shortcuts import render,HttpResponseRedirect,redirect
+from django.urls import reverse
+from .models import CustomUser
+from django.contrib import messages
+from django.contrib.auth import login,logout,authenticate
+
 
 # Create your views here.
 def home(request):
@@ -7,8 +12,47 @@ def home(request):
     else:
         return render(request,'app/index.html')
 def signuphand(request):
-    pass
+    if request.method=="POST":
+        firstname=request.POST.get('firstname')
+        lastname=request.POST.get('lastname')
+        username=request.POST.get('username')
+        email=request.POST.get('Email')
+        password=request.POST.get('password')
+        profile_img=request.FILES.get('profile_img')
+        confirm_password=request.POST.get('confirm_password')
+        print(profile_img)
+        if password != confirm_password:
+            messages.error(request,'Confirm password is wrong !!')
+            return HttpResponseRedirect(reverse('app:Create account'))
+        elif CustomUser.objects.filter(username=username).exists():
+            messages.error(request,'Username is already taken !!')
+            return HttpResponseRedirect(reverse('app:Create account'))
+        else:
+            user=CustomUser.objects.create_user(username=username,password=password,email=email)
+            user.first_name=firstname
+            user.last_name=lastname
+            # if profile_img is not None:
+            user.profileImg=profile_img
+            user.save()
+            login(request,user=user)
+            messages.success(request,'Account is created successfully !1')
+            return HttpResponseRedirect(reverse('app:home'))
+    return render(request,'app/signup.html')
 def loginhand(request):
-    pass
+    if request.method=="POST":
+        username=request.POST.get('username')
+        password=request.POST.get('password')
+        authenticated_user=authenticate(username=username,password=password)
+        if authenticated_user:
+            login(request,authenticated_user)
+            messages.success(request,'Successfully logged in !!')
+            return HttpResponseRedirect(reverse('app:home'))
+        else:
+            messages.error(request,'Username or password is wrong !!')
+            return HttpResponseRedirect(reverse('app:home'))
+
+    return render(request,'app/login.html')
 def logouthand(request):
-    pass
+    logout(request)
+    messages.success(request,"Successsfully logout !!")
+    return redirect('/')

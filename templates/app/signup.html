@@ -1,6 +1,6 @@
 {% extends "app/base.html" %}
 
-
+{% block title %}Create account{% endblock title %}
 {% block style %}
 <style>
     .form-body {
@@ -12,7 +12,7 @@
 
     }
 
-    #login_form {
+    #signup_form {
         padding: 5px;
         width: 100%;
         display: flex;
@@ -36,6 +36,30 @@
         border-radius: 5px;
         border: 1px solid black;
     }
+    .btn-1{
+        padding: 10px 5px;
+        margin-top: 10px;
+        background-color:rgb(0, 102, 255);
+        border-radius: 10px;
+        color: white;
+        font-size: large;
+        width: 60%;
+        border: 1px ;
+        margin-right: auto;
+        margin-left: auto;
+    }
+
+    @media(max-width:720px) {
+    .form-body{
+        width: 80%;
+    }
+}
+
+    @media(min-width:720px)  and (max-width:1024px) {
+    .form-body{
+        width: 60%;
+    }
+}
 </style>
 
 {% endblock style %}
@@ -44,7 +68,8 @@
 {% block body %}
 <div class="container">
     <div class="form-body">
-        <form id="login_form" action="#" class="">
+        <form id="signup_form" action="{% url 'app:Create account' %}" class="" method="post" onsubmit="Checkpassoword()" enctype="multipart/form-data" >
+            {% csrf_token %}
             <div class="form-item">
                 <label for="firstname">First Name</label>
                 <input type="text" id="firstname" name="firstname" required>
@@ -71,9 +96,19 @@
             </div>
             <div class="form-item">
                 <label for="confirm_password">Confirm Password</label>
-                <input type="password" id="confirm_password" required>
+                <input type="password" id="confirm_password" name="confirm_password" required>
+                <span class="" style="text-align: center;padding: 5px;" >
+                    If already have an account ?
+                    <a href="{% url 'app:login' %}" class="">Login</a>
+                </span>
             </div>
+            <button class="btn-1" type="submit">Signup</button>
         </form>
     </div>
 </div>
 {% endblock body %}
+{% block js %}
+<script>
+
+</script>
+{% endblock js %}
