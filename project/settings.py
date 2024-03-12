@@ -23,9 +23,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-4q2ob$cxd5slm$n+dc=1qghdf47&u7x!pbuffhant384o34_($'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['python-django-task-signup-login.onrender.com','127.0.0.1:8000']
+ALLOWED_HOSTS = ['python-django-task-signup-login.onrender.com','127.0.0.1']
 
 
 # Application definition

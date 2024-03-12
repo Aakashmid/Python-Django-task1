@@ -20,7 +20,15 @@ def signuphand(request):
         password=request.POST.get('password')
         profile_img=request.FILES.get('profile_img')
         confirm_password=request.POST.get('confirm_password')
-        print(profile_img)
+        Add1=request.POST.get('add1')
+        city=request.POST.get('city')
+        state=request.POST.get('state')
+        pincode=request.POST.get('pincode')
+        if city!=state:
+            address=Add1+" "+city+" "+state+" "+pincode
+        else:
+            address=Add1+" "+state+" "+pincode
+
         if password != confirm_password:
             messages.error(request,'Confirm password is wrong !!')
             return HttpResponseRedirect(reverse('app:Create account'))
@@ -31,6 +39,7 @@ def signuphand(request):
             user=CustomUser.objects.create_user(username=username,password=password,email=email)
             user.first_name=firstname
             user.last_name=lastname
+            user.address=address
             # if profile_img is not None:
             user.profileImg=profile_img
             user.save()
