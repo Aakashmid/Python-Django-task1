@@ -44,7 +44,7 @@ def signuphand(request):
             user.profileImg=profile_img
             user.save()
             login(request,user=user)
-            messages.success(request,'Account is created successfully !1')
+            messages.success(request,'Account is created successfully !!')
             return HttpResponseRedirect(reverse('app:home'))
     return render(request,'app/signup.html')
 def loginhand(request):
